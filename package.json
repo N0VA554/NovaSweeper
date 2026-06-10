@@ -11,7 +11,8 @@
     "dev": "concurrently \"npm run dev --workspace @novasweeper/api\" \"npm run dev --workspace @novasweeper/web\"",
     "dev:web": "npm run dev --workspace @novasweeper/web",
     "dev:api": "npm run dev --workspace @novasweeper/api",
-    "build": "npm run build --workspaces",
+    "build": "npm run build --workspace @novasweeper/web",
+    "build:all": "npm run build --workspaces",
     "lint": "npm run lint --workspaces",
     "typecheck": "npm run typecheck --workspaces"
   },

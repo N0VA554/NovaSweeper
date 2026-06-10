@@ -29,4 +29,6 @@ npm run dev:web
 
 Open `http://localhost:3000`.
 
-The API runs on `http://localhost:4000` and creates the required `scores` table on startup. PostgreSQL is exposed on host port `55432` to avoid conflicts with local PostgreSQL installs.
+For local development, Next.js also exposes score APIs at `/api/scores` and `/api/health`, so the web app can save scores without the separate Express API. PostgreSQL is exposed on host port `55432` to avoid conflicts with local PostgreSQL installs.
+
+For Vercel, set `DATABASE_URL` to a hosted PostgreSQL connection string such as Neon.

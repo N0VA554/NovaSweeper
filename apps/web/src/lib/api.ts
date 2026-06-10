@@ -1,9 +1,13 @@
 import type { Score, ScoreInput } from "@novasweeper/shared";
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "";
+
+function apiPath(path: string) {
+  return `${apiUrl}${path}`;
+}
 
 export async function fetchScores(difficulty: string): Promise<Score[]> {
-  const response = await fetch(`${apiUrl}/scores?difficulty=${difficulty}`, {
+  const response = await fetch(apiPath(`/api/scores?difficulty=${difficulty}`), {
     cache: "no-store"
   });
 
@@ -13,7 +17,7 @@ export async function fetchScores(difficulty: string): Promise<Score[]> {
 }
 
 export async function submitScore(input: ScoreInput): Promise<Score> {
-  const response = await fetch(`${apiUrl}/scores`, {
+  const response = await fetch(apiPath("/api/scores"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(input)
