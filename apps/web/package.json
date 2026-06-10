@@ -1,0 +1,30 @@
+{
+  "name": "@novasweeper/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "predev": "npm run build --workspace @novasweeper/shared",
+    "dev": "next dev -p 3000",
+    "prebuild": "npm run build --workspace @novasweeper/shared",
+    "build": "next build",
+    "pretypecheck": "npm run build --workspace @novasweeper/shared",
+    "start": "next start -p 3000",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@novasweeper/shared": "file:../../packages/shared",
+    "lucide-react": "^0.511.0",
+    "next": "^16.2.9",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "@types/react": "^19.1.5",
+    "@types/react-dom": "^19.1.5",
+    "postcss": "^8.5.15",
+    "typescript": "^5.8.3"
+  }
+}

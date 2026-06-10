@@ -1,0 +1,24 @@
+{
+  "name": "novasweeper",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Novasweeper - a neon nova themed Minesweeper web product.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace @novasweeper/api\" \"npm run dev --workspace @novasweeper/web\"",
+    "dev:web": "npm run dev --workspace @novasweeper/web",
+    "dev:api": "npm run dev --workspace @novasweeper/api",
+    "build": "npm run build --workspaces",
+    "lint": "npm run lint --workspaces",
+    "typecheck": "npm run typecheck --workspaces"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
