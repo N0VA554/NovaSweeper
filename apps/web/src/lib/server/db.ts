@@ -26,6 +26,31 @@ export async function migrateScoresTable() {
   globalThis.novasweeperMigrated ??= getPool().query(`
     CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
+    CREATE TABLE IF NOT EXISTS users (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      username VARCHAR(32) NOT NULL,
+      email VARCHAR(255) NOT NULL,
+      password_hash TEXT NOT NULL,
+      role VARCHAR(16) NOT NULL DEFAULT 'user',
+      status VARCHAR(16) NOT NULL DEFAULT 'active',
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+
+    CREATE TABLE IF NOT EXISTS sessions (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      token_hash TEXT NOT NULL UNIQUE,
+      expires_at TIMESTAMPTZ NOT NULL,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+
+    CREATE TABLE IF NOT EXISTS system_config (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL,
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+
     CREATE TABLE IF NOT EXISTS scores (
       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
       player_name VARCHAR(32) NOT NULL,
@@ -40,9 +65,26 @@ export async function migrateScoresTable() {
     ALTER TABLE scores
       ADD COLUMN IF NOT EXISTS result VARCHAR(12) NOT NULL DEFAULT 'won';
 
+    ALTER TABLE users DROP CONSTRAINT IF EXISTS users_username_key;
+    ALTER TABLE users DROP CONSTRAINT IF EXISTS users_email_key;
+
+    INSERT INTO system_config (key, value)
+    VALUES
+      ('registration_enabled', 'true'),
+      ('username_unique_enabled', 'false'),
+      ('email_unique_enabled', 'false'),
+      ('maintenance_message', ''),
+      ('default_game_mode', 'solo')
+    ON CONFLICT (key) DO NOTHING;
+
     CREATE INDEX IF NOT EXISTS scores_difficulty_score_idx
       ON scores (difficulty, result DESC, score DESC, seconds ASC, created_at DESC);
+
+    CREATE INDEX IF NOT EXISTS sessions_user_id_idx ON sessions (user_id);
+    CREATE INDEX IF NOT EXISTS sessions_expires_at_idx ON sessions (expires_at);
   `).then(() => undefined);
 
   return globalThis.novasweeperMigrated;
 }
+
+export const migrateApp = migrateScoresTable;

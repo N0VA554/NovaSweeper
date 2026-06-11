@@ -1,0 +1,159 @@
+.auth-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 24px;
+}
+
+.auth-card {
+  width: min(460px, 100%);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 22px;
+  background: linear-gradient(180deg, rgba(12, 14, 28, 0.94), rgba(5, 6, 14, 0.9));
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.46), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.wide-card {
+  width: min(760px, 100%);
+}
+
+.admin-card {
+  width: min(1180px, 100%);
+}
+
+.auth-card h1 {
+  margin: 6px 0 18px;
+  font-size: 3rem;
+}
+
+.auth-form {
+  display: grid;
+  gap: 14px;
+}
+
+.auth-form label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.auth-form input,
+.auth-form select,
+.auth-form textarea,
+.admin-user-row select {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0 12px;
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.password-field {
+  display: grid;
+  grid-template-columns: 1fr 42px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.password-field input {
+  border: 0;
+  background: transparent;
+}
+
+.password-field button {
+  display: grid;
+  border: 0;
+  border-left: 1px solid var(--line);
+  border-radius: 0 6px 6px 0;
+  place-items: center;
+  color: var(--cyan);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.auth-form textarea {
+  min-height: 92px;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.checkbox-row {
+  display: flex !important;
+  align-items: center;
+  grid-template-columns: auto 1fr;
+  gap: 10px !important;
+}
+
+.checkbox-row input {
+  width: 18px;
+  min-height: 18px;
+}
+
+.form-message,
+.auth-switch {
+  margin: 0;
+  color: var(--muted);
+}
+
+.profile-grid,
+.admin-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.profile-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.profile-grid .play-again-button,
+.admin-link {
+  grid-column: 1 / -1;
+}
+
+.profile-card,
+.admin-section {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.profile-card span,
+.admin-user-row span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.profile-card strong {
+  display: block;
+  margin-top: 6px;
+  overflow-wrap: anywhere;
+}
+
+.admin-grid {
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+}
+
+.admin-table {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-user-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 120px 130px;
+  gap: 10px;
+  align-items: center;
+  min-height: 64px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.035);
+}

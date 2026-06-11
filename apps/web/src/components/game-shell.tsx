@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent, type ReactNode } from "react";
+import Link from "next/link";
 import { Bomb, Bot, Flag, Flame, Gauge, Medal, RotateCcw, Sparkles, Swords, Timer, Trophy } from "lucide-react";
 import {
   calculateScore,
@@ -294,6 +295,11 @@ export function GameShell() {
             <Flame size={16} />
             {statusCopy}
           </div>
+          <nav className="account-nav" aria-label="Account">
+            <Link href="/login">Login</Link>
+            <Link href="/register">Register</Link>
+            <Link href="/profile">Profile</Link>
+          </nav>
         </header>
 
         <div className="command-panel">

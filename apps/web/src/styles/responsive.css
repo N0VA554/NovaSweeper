@@ -1,0 +1,72 @@
+@media (max-width: 1100px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .scoreboard {
+    align-self: auto;
+  }
+
+  .boards-grid.pve-boards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    width: min(100vw - 20px, 680px);
+    padding: 10px 0;
+  }
+
+  .play-surface,
+  .scoreboard {
+    padding: 14px;
+  }
+
+  :root {
+    --cell-size: 30px;
+  }
+
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 2.7rem;
+  }
+
+  .brand-lockup {
+    align-items: flex-start;
+  }
+
+  .brand-icon {
+    width: 54px;
+    height: 54px;
+  }
+
+  .difficulty-tabs,
+  .mode-tabs,
+  .ai-tabs,
+  .metrics,
+  .endgame-stats,
+  .race-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .pve-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .name-field {
+    width: 100%;
+  }
+
+  .profile-grid,
+  .admin-grid,
+  .admin-user-row {
+    grid-template-columns: 1fr;
+  }
+}
