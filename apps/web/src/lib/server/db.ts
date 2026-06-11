@@ -1,7 +1,5 @@
 import pg from "pg";
 
-const connectionString = process.env.DATABASE_URL;
-
 declare global {
   // eslint-disable-next-line no-var
   var novasweeperPool: pg.Pool | undefined;
@@ -10,6 +8,7 @@ declare global {
 }
 
 export function getPool() {
+  const connectionString = getConnectionString();
   if (!connectionString) {
     throw new Error("DATABASE_URL is not configured.");
   }
@@ -20,6 +19,21 @@ export function getPool() {
   });
 
   return globalThis.novasweeperPool;
+}
+
+function getConnectionString() {
+  const candidates = [process.env.DATABASE_URL, process.env.POSTGRES_URL, process.env.POSTGRES_PRISMA_URL].filter(Boolean) as string[];
+  const preferred = candidates.find((value) => process.env.NODE_ENV === "production" && !isLocalDatabaseUrl(value));
+  return preferred ?? candidates[0];
+}
+
+function isLocalDatabaseUrl(value: string) {
+  try {
+    const url = new URL(value);
+    return ["127.0.0.1", "localhost", "::1"].includes(url.hostname);
+  } catch {
+    return false;
+  }
 }
 
 export async function migrateScoresTable() {
